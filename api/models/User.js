@@ -8,13 +8,13 @@ class User extends S.Model {
       const res = await bc.hash(password, salt);
       return res;
     } catch (error) {
-      console.error(error);
+      console.error("Fallo en el hasheo de password");
     }
   }
 
   async validatePassword(password) {
     try {
-      res = await bc.hash(password, this.salt);
+      const res = await bc.hash(password, this.salt);
       return res == this.password;
     } catch (error) {
       console.error(error);
@@ -49,18 +49,13 @@ User.init(
   { sequelize: db, modelName: "user" }
 );
 
-User.addHook("beforeValidate", async function (user) {
+User.addHook("beforeValidate", function (user) {
   const salt = bc.genSaltSync();
   user.salt = salt;
 
-  try {
-    const salt = bc.genSaltSync();
-    user.salt = salt;
-    const res = await user.hash(this.password, this.salt);
-    user.password = res;
-  } catch (error) {
-    console.error(error);
-  }
+  return user.hash(user.password, user.salt).then((hash) => {
+    user.password = hash;
+  });
 });
 
 module.exports = User;
