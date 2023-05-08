@@ -1,15 +1,35 @@
 const axios = require("axios");
-const config = require("../config");
+const { URLAPI, APIKEY } = require("../config");
 const qs = require("qs");
 
-const tmdbAPI = "https://api.themoviedb.org/3";
-
-const queries = config.APIKEY;
-
 class MoviesService {
-  static async getMovie(id) {
+  static async getMovie(id, q) {
     try {
-      const res = await axios.get(`${tmdbAPI}/movie/${id}${queries}`);
+      const res = await axios.get(`${URLAPI}/movie/${id}${APIKEY}&${q}`);
+      return { error: false, data: res.data };
+    } catch (error) {
+      return { error: true, data: error };
+    }
+  }
+  static async getPopular(q) {
+    try {
+      const res = await axios.get(`${URLAPI}/movie/popular${APIKEY}&${q}`);
+      return { error: false, data: res.data };
+    } catch (error) {
+      return { error: true, data: error };
+    }
+  }
+  static async getUpcoming(q) {
+    try {
+      const res = await axios.get(`${URLAPI}/movie/upcoming${APIKEY}&${q}`);
+      return { error: false, data: res.data };
+    } catch (error) {
+      return { error: true, data: error };
+    }
+  }
+  static async getToprated(q) {
+    try {
+      const res = await axios.get(`${URLAPI}/movie/top_rated${APIKEY}&${q}`);
       return { error: false, data: res.data };
     } catch (error) {
       return { error: true, data: error };

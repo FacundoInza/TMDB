@@ -1,10 +1,16 @@
 import { Box, Button, Flex, Heading } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
+import { setLogOut } from "../state/user";
 
 const Navbar = () => {
   const user = useSelector((state) => state.user);
-  console.log("user:", user);
+  const dispatch = useDispatch();
+  const handlerLogOut = (e) => {
+    Cookies.remove("token");
+    dispatch(setLogOut());
+  };
   return (
     <Flex
       as="nav"
@@ -36,7 +42,7 @@ const Navbar = () => {
         alignItems="center"
       >
         {user.email ? (
-          <Button bg="transparent" border="1px">
+          <Button bg="transparent" border="1px" onClick={handlerLogOut}>
             Cerrar sesión
           </Button>
         ) : (

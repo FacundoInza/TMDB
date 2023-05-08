@@ -1,13 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-import Buscador from "./components/Buscador";
 import ListaMovies from "./components/ListaMovies";
-import MoviesCollection from "./components/MoviesCollection";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Fetch from "./utils";
+import Movie from "./components/Movie";
+import Home from "./components/Home";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,18 +21,11 @@ const App = () => {
     <>
       <Navbar />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <div className="content">
-              <Buscador />
-              <MoviesCollection />
-            </div>
-          }
-        />
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/search" element={<ListaMovies />} />
+        <Route path="/movie/:movieId" element={<Movie />} />
       </Routes>
     </>
   );

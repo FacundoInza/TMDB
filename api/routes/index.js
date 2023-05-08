@@ -6,7 +6,7 @@ const user = require("./user");
 
 const router = express.Router();
 
-router.use("/movies", movies);
+router.use("/movie", movies);
 router.use("/search", search);
 router.use("/user", user);
 

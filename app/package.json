@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "^2.6.1",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
@@ -12,6 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.4.6",
     "axios": "^1.4.0",
+    "colorthief": "^2.4.0",
     "framer-motion": "^10.12.8",
     "js-cookie": "^3.0.5",
     "node-fetch": "^3.3.1",

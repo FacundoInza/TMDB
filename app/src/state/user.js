@@ -3,6 +3,7 @@ import axios from "axios";
 
 export const setUser = createAction("SET_USER");
 export const setRegister = createAction("SET_REGISTER");
+export const setLogOut = createAction("SET_LOGOUT");
 
 const initialState = {
   email: null,
@@ -19,4 +20,5 @@ export const registerReducer = createReducer(initialState, {
     state.userName = action.payload.userName;
     state.loggedIn = true;
   },
+  [setLogOut]: (state) => initialState,
 });
