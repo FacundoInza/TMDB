@@ -11,18 +11,30 @@ class UserControler {
     }
   }
   static async login(req, res) {
+    console.log(req.body.email);
     const user = await User.findOne({ where: { email: req.body.email } });
-    if (!user) return res.status(401).json({ error: "Invalid email" });
+    if (!user) return res.status(401).send({ error: "Invalid email" });
     const bool = await user.validatePassword(req.body.password);
     console.log(bool);
     if (bool) {
-      const token = Token.generateToken({
+      const payload = {
         userName: user.userName,
         email: user.email,
-      });
-      return res.status(201).cookie("token", token).send(token);
+        loggedIn: true,
+      };
+      const token = Token.generateToken(payload);
+      res.status(200).json({ payload: payload, token: token });
     } else {
-      return res.status(401).json({ error: "Invalid password" });
+      return res.status(401).send({ error: "Invalid password" });
+    }
+  }
+  static async me(req, res) {
+    try {
+      const payload = await Token.validateToken(req.body.token);
+      console.log(payload);
+      res.status(200).send(payload);
+    } catch (error) {
+      res.status(401).send({ error: "Invalid token" });
     }
   }
 }

@@ -8,10 +8,14 @@ const User = require("./models/User");
 const routes = require("./routes");
 
 const app = express();
-
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
 app.use(morgan("tiny"));
 
 app.use("/api", routes);
