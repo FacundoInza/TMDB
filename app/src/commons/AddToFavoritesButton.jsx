@@ -33,6 +33,8 @@ export function AddToFavoritesButton({ movie }) {
           if (!error) return alert(data);
         });
       }
+    } else {
+      alert("You must be logged");
     }
   };
 

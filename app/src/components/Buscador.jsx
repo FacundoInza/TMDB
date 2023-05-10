@@ -1,10 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Fetch from "../utils/index";
 
 const Buscador = () => {
-  const movies = useSelector((state) => state.movies);
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
@@ -15,10 +14,16 @@ const Buscador = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const dispatchSearch = Fetch.search(search);
-    dispatchSearch(dispatch);
-    navigate("/search");
-    console.log("movies", movies);
+    const fetchSearch = async function (search) {
+      try {
+        const dispatchSearch = await Fetch.search(search);
+        dispatchSearch(dispatch);
+        navigate("/search");
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchSearch(search);
   };
 
   return (
@@ -31,7 +36,9 @@ const Buscador = () => {
       <div>
         <form onSubmit={handleSubmit}>
           <input type="text" onChange={handleChange} value={search} required />
-          <button type="submit">search</button>
+          <button type="submit" required>
+            search
+          </button>
         </form>
       </div>
     </section>

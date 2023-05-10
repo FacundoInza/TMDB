@@ -5,19 +5,22 @@ import React from "react";
 
 const ListaMovies = () => {
   const search = useSelector((state) => state.search);
+  console.log("search", search);
 
   return (
-    <>
-      <Flex p="20px">
-        <Input placeholder="Type here..." />
-      </Flex>
-      {/* Lista de películas */}
-      <Box flex="1" ml="4">
-        {search.map((movie, i) => (
-          <ItemList key={movie.id} id={i} movie={movie} />
-        ))}
-      </Box>
-    </>
+    search.results && (
+      <>
+        <Flex p="20px">
+          <Input placeholder="Type here..." />
+        </Flex>
+        {/* Lista de películas */}
+        <Box flex="1" ml="4">
+          {search.results.map((movie, i) => (
+            <ItemList key={movie.id} id={i} movie={movie} />
+          ))}
+        </Box>
+      </>
+    )
   );
 };
 export default ListaMovies;

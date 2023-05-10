@@ -90,7 +90,12 @@ const Navbar = () => {
           {user.email ? (
             <>
               <Link to={`/user/${user.id}`}>
-                <Tag size="lg" colorScheme="blue" borderRadius="full">
+                <Tag
+                  size="lg"
+                  colorScheme="blue"
+                  borderRadius="full"
+                  m={"15px"}
+                >
                   <Avatar
                     src={user.imageURL || "https://bit.ly/broken-link"}
                     size="xs"
@@ -107,6 +112,7 @@ const Navbar = () => {
                 ref={btnRef}
                 bg="transparent"
                 border="1px"
+                m={"20px"}
               >
                 Favorites Movies
               </Button>
