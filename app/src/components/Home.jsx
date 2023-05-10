@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Buscador from "./Buscador";
 import MoviesCollection from "./MoviesCollection";
 import Fetch from "../utils";
+import { Box } from "@chakra-ui/react";
 
 const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -16,12 +17,20 @@ const Home = () => {
   return (
     <div className="content">
       <Buscador />
-      <MoviesCollection
-        movies={popularMovies}
-        nameCollection={"Most Popular"}
-      />
-      <MoviesCollection movies={topRatedMovies} nameCollection={"Top rated"} />
-      <MoviesCollection movies={upcomingMovies} nameCollection={"Up coming"} />
+      <Box>
+        <MoviesCollection
+          movies={popularMovies}
+          nameCollection={"Most Popular"}
+        />
+        <MoviesCollection
+          movies={topRatedMovies}
+          nameCollection={"Top rated"}
+        />
+        <MoviesCollection
+          movies={upcomingMovies}
+          nameCollection={"Up coming"}
+        />
+      </Box>
     </div>
   );
 };

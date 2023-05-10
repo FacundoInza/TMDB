@@ -30,6 +30,7 @@ const Register = () => {
     dispatch(setRegister(newUser));
     navigate("/login");
   };
+
   return (
     <Box bg="gray.50" h="80vh">
       <Center h="100%">

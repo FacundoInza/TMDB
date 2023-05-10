@@ -40,10 +40,8 @@ User.init(
       type: S.STRING,
     },
     favorites: {
-      type: S.ARRAY(S.STRING),
-      get() {
-        return [];
-      },
+      type: S.JSON,
+      defaultValue: [],
     },
   },
   { sequelize: db, modelName: "user" }

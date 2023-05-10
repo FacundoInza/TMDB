@@ -100,47 +100,12 @@ input[type="text"] {
   font-family: Arial, sans-serif;
 }
 
-button {
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-  font-family: Arial, sans-serif;
-  margin-left: 1rem;
-}
-
 .content {
-  margin-left: 10%;
-  margin-right: 10%;
+  margin: auto;
+  max-width: 1000px;
 }
 
-.card {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 20px;
-}
-
-.card-image {
-  flex-basis: 25%;
-  margin-right: 20px;
-}
-
-.card-image img {
-  width: 100%;
-}
-
-.card-details {
-  flex-basis: 75%;
-}
-
-.card-title a {
-  color: #333;
-  text-decoration: none;
-}
-
-.card-info p {
-  margin: 0;
+.carousel-container {
+  margin-top: 80px;
+  background-color: none;
 }

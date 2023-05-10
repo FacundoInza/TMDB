@@ -9,32 +9,37 @@ import {
 } from "@chakra-ui/react";
 
 import AddToFavoritesButton from "./AddToFavoritesButton";
+import { Link } from "react-router-dom";
 
 const ItemList = ({ movie }) => {
-  const handleAddToFavorites = (e) => {};
   const URLimage = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+
   return (
     <Card
       direction={{ base: "column", sm: "row" }}
       overflow="hidden"
       variant="outline"
     >
-      <Image
-        objectFit="cover"
-        maxW={{ base: "100%", sm: "200px" }}
-        src={URLimage}
-        alt="Caffe Latte"
-      />
+      <Link to={`/movie/${movie.id}`}>
+        <Image
+          objectFit="cover"
+          maxW={{ base: "100%", sm: "200px" }}
+          src={URLimage}
+          alt="Caffe Latte"
+        />
+      </Link>
 
       <Stack>
         <CardBody>
-          <Heading size="md">{movie.title}</Heading>
+          <Link to={`/movie/${movie.id}`}>
+            <Heading size="md">{movie.title}</Heading>
+          </Link>
 
           <Text py="2">{movie.overview}</Text>
         </CardBody>
 
         <CardFooter>
-          <AddToFavoritesButton props={{ onclick: { handleAddToFavorites } }} />
+          <AddToFavoritesButton movie={movie} />
         </CardFooter>
       </Stack>
     </Card>

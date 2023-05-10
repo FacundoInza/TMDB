@@ -1,9 +1,10 @@
-import { Box, Text, VStack } from "@chakra-ui/react";
+import { Badge, Box, Heading, Stack, Text } from "@chakra-ui/react";
 import "../assets/movie.css";
 import { useParams } from "react-router-dom";
 import Fetch from "../utils";
 import { useEffect, useState } from "react";
 import ColorThief from "colorthief";
+import AddToFavoritesButton from "../commons/AddToFavoritesButton";
 
 const Movie = () => {
   let { movieId } = useParams();
@@ -11,7 +12,6 @@ const Movie = () => {
   const url = `url(https://image.tmdb.org/t/p/w1280/${movie.backdrop_path})`;
 
   useEffect(() => {
-    console.log(movieId);
     Fetch.getMovie(movieId)
       .then((movie) => setMovie(movie))
       .catch((error) => console.error(error));
@@ -64,17 +64,35 @@ const Movie = () => {
                   alt={movie.title}
                 />
               </Box>
-              <VStack align="start">
-                <Text fontSize="3xl" fontWeight="bold" color="white">
+              <Box p={{ base: 4, md: 8 }} flex="1" color="white">
+                <Stack direction="row" justify="space-between">
+                  <Badge colorScheme="purple">{movie.release_date}</Badge>
+                  <Badge colorScheme="teal">{movie.vote_average}/10</Badge>
+                </Stack>
+                <Heading as="h2" size="lg" mt={2} mb={4}>
                   {movie.title}
+                </Heading>
+                <Text fontSize={{ base: "md", lg: "md" }} mb={6}>
+                  {movie.overview}
                 </Text>
-                <Text fontSize="lg" color="white">
-                  Fecha de lanzamiento:{" "}
-                </Text>
-                <Text fontSize="md" color="white">
-                  des
-                </Text>
-              </VStack>
+                <Stack direction={{ base: "column", md: "row" }} spacing={4}>
+                  <Box>
+                    <Text fontWeight="bold" mb={1}>
+                      Duración
+                    </Text>
+                    <Text>{movie.runtime} min</Text>
+                  </Box>
+                  <Box>
+                    <Text fontWeight="bold" mb={1}>
+                      Géneros
+                    </Text>
+                    <Text>
+                      {movie.genres.map(({ name }) => name).join(", ")}
+                    </Text>
+                  </Box>
+                  <AddToFavoritesButton movie={movie} />
+                </Stack>
+              </Box>
             </Box>
           </Box>
         </Box>

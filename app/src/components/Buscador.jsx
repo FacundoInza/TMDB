@@ -30,7 +30,7 @@ const Buscador = () => {
       </h5>
       <div>
         <form onSubmit={handleSubmit}>
-          <input type="text" onChange={handleChange} value={search} />
+          <input type="text" onChange={handleChange} value={search} required />
           <button type="submit">search</button>
         </form>
       </div>
